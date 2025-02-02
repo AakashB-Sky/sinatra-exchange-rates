@@ -6,5 +6,8 @@ require "json" # required to turn JSON string response into hashes and arrays
 # https://api.exchangerate.host/list
   # ? access_key = YOUR_ACCESS_KEY
 
-response = HTTP.get("https://api.exchangerate.host/list?access_key=#{ENV.fetch("EXCHANGE_RATE_KEY")}")
-pp response
+exchange_rate_list_url = "https://api.exchangerate.host/list?access_key=#{ENV.fetch("EXCHANGE_RATE_KEY")}"
+
+response = HTTP.get(exchange_rate_list_url)
+parsed_response = JSON.parse(response)
+pp parsed_response
