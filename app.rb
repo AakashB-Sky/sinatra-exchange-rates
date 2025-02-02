@@ -28,6 +28,8 @@ get("/:from_currency") do
 end
 
 get("/:from_currency/:to_currency") do
+  @from_currency = params.fetch(:from_currency)
+  @to_currency = params.fetch(:to_currency)
 
   erb(:results)
 end
