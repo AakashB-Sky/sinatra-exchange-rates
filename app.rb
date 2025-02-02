@@ -12,5 +12,9 @@ get("/") do
   currency_list_hash = parsed_response.fetch("currencies") # isolate the currency list
   @currency_list_array = currency_list_hash.keys # put the three-letter currency codes into an array
   
-  erb(:index)
+  erb(:from_currency)
+end
+
+get("/:from_currency") do
+  erb(:to_currency)
 end
