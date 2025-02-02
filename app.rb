@@ -22,7 +22,12 @@ get("/:from_currency") do
   parsed_response = JSON.parse(raw_response) # turn JSON response into arrays & hashes
   currency_list_hash = parsed_response.fetch("currencies") # isolate the currency list
   @currency_list_array = currency_list_hash.keys # put the three-letter currency codes into an a
-  
+
   @from_currency = params.fetch(:from_currency)
   erb(:to_currency)
+end
+
+get("/:from_currency/:to_currency") do
+
+  erb(:results)
 end

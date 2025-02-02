@@ -7,7 +7,7 @@
 <ul>
   <% @currency_list_array.each do |currency| %>
     <li>
-      <a href="/<%= currency %>">
+      <a href="/<%= @from_currency %>/<%= currency %>">
         Convert 1 <%= @from_currency %> to <%= currency %>...
       </a>
     </li>
