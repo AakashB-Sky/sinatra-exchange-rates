@@ -1,1 +1,9 @@
 <h1> Currency Pairs </h1>
+
+<ul>
+  <% @currency_list_array.each do |currency| %>
+    <li>
+      Convert 1 <%= currency %> to...
+    </li>
+  <% end %>
+</ul>
