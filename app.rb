@@ -16,5 +16,13 @@ get("/") do
 end
 
 get("/:from_currency") do
+  exchange_rate_list_url = "https://api.exchangerate.host/list?access_key=#{ENV.fetch("EXCHANGE_RATE_KEY")}"
+
+  raw_response = HTTP.get(exchange_rate_list_url) # HTML query
+  parsed_response = JSON.parse(raw_response) # turn JSON response into arrays & hashes
+  currency_list_hash = parsed_response.fetch("currencies") # isolate the currency list
+  @currency_list_array = currency_list_hash.keys # put the three-letter currency codes into an a
+  
+  @from_currency = params.fetch(:from_currency)
   erb(:to_currency)
 end
