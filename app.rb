@@ -28,8 +28,16 @@ get("/:from_currency") do
 end
 
 get("/:from_currency/:to_currency") do
-  @from_currency = params.fetch(:from_currency)
-  @to_currency = params.fetch(:to_currency)
+  #----------- query string key/value pairs ----------------
+    @from_currency = params.fetch(:from_currency)
+    @to_currency = params.fetch(:to_currency)
+    amount = 1
+
+  #------------ API call ----------------------------------
+  conversion_url = "https://api.exchangerate.host/convert?from=#{@from_currency}&to=#{@to_currency}&amount=#{amount}&access_key=#{ENV.fetch("EXCHANGE_RATE_KEY")}"
+  raw_response = HTTP.get(conversion_url) # HTML query
+  parsed_response = JSON.parse(raw_response) # turn JSON response into arrays & hashes
+  @exchange_rate = parsed_response.fetch("result") # isolate FX rate response
 
   erb(:results)
 end
